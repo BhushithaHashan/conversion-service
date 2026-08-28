@@ -18,8 +18,8 @@ import java.util.Optional;
 public class AsyncConversionWorker {
 
     private static final Logger log = LoggerFactory.getLogger(AsyncConversionWorker.class);
-    private static final String PROCESSING_SERVICE_URL = "http://PROCESSING-SERVICE/api/process"\;
-    private static final String METADATA_SERVICE_URL = "http://METADATA-SERVICE/api/metadata"\;
+    private static final String PROCESSING_SERVICE_URL = "http://PROCESSING-SERVICE/api/process";
+    private static final String METADATA_SERVICE_URL = "http://METADATA-SERVICE/api/metadata";
 
     private final ConversionJobRepository repository;
     private final RestTemplate restTemplate;
