@@ -11,14 +11,26 @@ public class VideoIdExtractor {
         "(?:https?:\\/\\/)?(?:www\\.)?(?:youtube\\.com\\/(?:[^\\/\\n\\s]+\\/\\S+\\/|(?:v|e(?:mbed)?)\\/|.*[?&]v=)|youtu\\.be\\/)([a-zA-Z0-9_-]{11})"
     );
 
+    private static final Pattern SOUNDCLOUD_PATTERN = Pattern.compile(
+        "(?:https?:\\/\\/)?(?:www\\.)?soundcloud\\.com\\/([a-zA-Z0-9_-]+)\\/([a-zA-Z0-9_-]+)"
+    );
+
     public String extractVideoId(String url) {
         if (url == null || url.isBlank()) {
             return null;
         }
-        Matcher matcher = YOUTUBE_PATTERN.matcher(url.trim());
-        if (matcher.find()) {
-            return matcher.group(1);
+        String trimmed = url.trim();
+
+        Matcher ytMatcher = YOUTUBE_PATTERN.matcher(trimmed);
+        if (ytMatcher.find()) {
+            return ytMatcher.group(1);
         }
+
+        Matcher scMatcher = SOUNDCLOUD_PATTERN.matcher(trimmed);
+        if (scMatcher.find()) {
+            return "sc-" + scMatcher.group(1) + "-" + scMatcher.group(2);
+        }
+
         return null;
     }
 }
